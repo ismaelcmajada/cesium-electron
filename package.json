@@ -1,0 +1,15 @@
+{
+  "name": "cesium-electron",
+  "version": "1.0.0",
+  "description": "Aplicación de Globo 3d usando Cesium y ElectronJS",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Ismael Cedrés Gil",
+  "license": "MIT",
+  "devDependencies": {
+    "cesium": "^1.85.0",
+    "electron": "^15.0.0"
+  }
+}
