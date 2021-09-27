@@ -19,29 +19,15 @@ Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 		});
 
 		viewer.scene.canvas.addEventListener('contextmenu', (event) => {
-			event.preventDefault();
 
 			var ellipsoid = viewer.scene.globe.ellipsoid;
 			var cartesian = viewer.camera.pickEllipsoid(new Cesium.Cartesian3(event.clientX, event.clientY), ellipsoid);
-		  
-		   
-			addMarker(ellipsoid.cartesianToCartographic(cartesian));
-		
-		}, false);
+			var location = ellipsoid.cartesianToCartographic(cartesian);
 
-		function addMarker(location) {
-			viewer.entities.add({
-				name : 'location',
-				position : Cesium.Cartesian3.fromRadians(location.longitude, location.latitude, 10),
-				point : {
-				  pixelSize : 5,
-				  color : Cesium.Color.RED,
-				  outlineColor : Cesium.Color.WHITE,
-				  outlineWidth : 2,
-				  heightReference: Cesium.HeightReference.RELATIVE_TO_GROUND 
-				}
-			})
-		}
+			var marker = new Marker(viewer, 'location', location.longitude, location.latitude, 10);
+			marker.addMarker();
+		
+		});
 	  
 
         document.getElementsByClassName("cesium-geocoder-input")[0].placeholder = "Busca un lugar...";
