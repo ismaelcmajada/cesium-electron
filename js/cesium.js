@@ -1,5 +1,6 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1NTk5NWJkZC1hMDg4LTQwYWMtOTQyOC00NzY1MzQ5ZDlhODUiLCJpZCI6NTc0NTUsImlhdCI6MTYyMjM2Njk0Nn0.kCsqAKJkEZNARnEuy83zO3VC_x2L5YowG969TzBQULw"
 
+		//Instanciación y configuración del globo.
 		var viewer = new Cesium.Viewer('globo', {
 			animation: false,
 			baseLayerPicker: false,
@@ -18,6 +19,14 @@ Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 			timeline: false
 		});
 
+		//Cargamos los marcadores desde el JSON
+		let markers = markerOptions.markers;
+		markers.forEach(marker => {
+			//Creamos un objeo Marker con cada marcador del JSON y lo añadimos al globo.
+			let markerObj = new Marker(viewer, marker.name, marker.longitude, marker.latitude, marker.z);
+			markerObj.addMarker();
+		});
+
 		viewer.scene.canvas.addEventListener('contextmenu', (event) => {
 
 			var ellipsoid = viewer.scene.globe.ellipsoid;
@@ -26,7 +35,7 @@ Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 			var marker = new Marker(viewer, 'location', location.longitude, location.latitude, 10);
 			marker.addMarker();
-		
+			markerOptions.saveMarker(marker.name, marker.longitude, marker.latitude, marker.z);
 		});
 	  
 
