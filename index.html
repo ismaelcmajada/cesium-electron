@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <title>Cesium-Electron</title>
     <script src="node_modules/cesium/Build/Cesium/Cesium.js"></script>
     <link rel="stylesheet" href="node_modules/cesium/Build/Cesium/Widgets/widgets.css">
@@ -11,7 +12,16 @@
 </head>
 <body>
     <div id="globo"></div>
+    <form id="marker_form">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" name="name">
+        <label for="description">Descripción</label>
+        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+        <input type="button" id="boton_form" name="boton_form" value="Añadir punto">
+        <input type="button" id="botonBorrar_form" name="botonBorrar_form" value="Borrar punto">
+    </form>
     <script src="Class/Marker.js"></script>
     <script src="js/cesium.js"></script>
+    <script src="js/form.js"></script>
 </body>
 </html>

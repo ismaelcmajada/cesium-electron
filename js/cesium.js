@@ -20,22 +20,25 @@ Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 		});
 
 		//Cargamos los marcadores desde el JSON
-		let markers = markerOptions.markers;
-		markers.forEach(marker => {
+		let markersJSON = markerOptions.markers;
+		var markers;
+		markersJSON.forEach(marker => {
 			//Creamos un objeo Marker con cada marcador del JSON y lo añadimos al globo.
-			let markerObj = new Marker(viewer, marker.name, marker.longitude, marker.latitude, marker.z);
+			let markerObj = new Marker(viewer, marker.name, marker.longitude, marker.latitude, marker.z, marker.description);
 			markerObj.addMarker();
+
+			markers.push(markerObj);
 		});
 
-		viewer.scene.canvas.addEventListener('contextmenu', (event) => {
-
-			var ellipsoid = viewer.scene.globe.ellipsoid;
-			var cartesian = viewer.camera.pickEllipsoid(new Cesium.Cartesian3(event.clientX, event.clientY), ellipsoid);
-			var location = ellipsoid.cartesianToCartographic(cartesian);
-
-			var marker = new Marker(viewer, 'location', location.longitude, location.latitude, 10);
-			marker.addMarker();
-			markerOptions.saveMarker(marker.name, marker.longitude, marker.latitude, marker.z);
+		viewer.selectedEntityChanged.addEventListener(function (selectedEntity) {
+				if (Cesium.defined(selectedEntity)) {
+				viewer.scene.screenSpaceCameraController.minimumZoomDistance = 0;
+				viewer.flyTo(selectedEntity, {
+					offset: new Cesium.HeadingPitchRange(0, (-Math.PI / 2) + 0.0000001),
+				}).then( () => {
+					viewer.scene.screenSpaceCameraController.minimumZoomDistance = 0;
+				})
+			}
 		});
 	  
 

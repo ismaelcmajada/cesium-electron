@@ -11,12 +11,13 @@ contextBridge.exposeInMainWorld(
     }
     );
 
-function saveMarker(name, longitude, latitude, z) {
+function saveMarker(name, longitude, latitude, z, description = "") {
     let marker = {
         'name': name,
         'longitude': longitude,
         'latitude': latitude,
-        'z': z
+        'z': z,
+        'description': description
     }
     markers.push(marker);
     fs.writeFileSync('./data/markers.json', JSON.stringify(markers));
