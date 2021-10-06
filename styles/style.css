@@ -45,6 +45,34 @@ html, body, #globo {
     display: none;
 }
 
+button {
+    margin: 0 10px;
+	border: 1px solid black;
+	padding: 10px;
+    width:100px;
+	border-radius: 30px;
+}
+
+#top_nav2 {
+    background-color: white;
+    border-radius: 30px;
+    color: black;
+    margin: 0 auto;
+    padding: 10px;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    left: 0;
+    width: 220px;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    display: none;
+}
+
 #top_nav div {
     margin: 0 10px;
 }
@@ -56,6 +84,10 @@ html, body, #globo {
 	border-radius: 30px;
 	width: 90%;
 	font-size: 18px;
+}
+
+button:hover, input[type=button]:hover {
+    background-color: grey;
 }
 
 #borrar, #modificar {

@@ -21,18 +21,6 @@ Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 		markerList.load(viewer);
 
-		viewer.selectedEntityChanged.addEventListener(function (selectedEntity) {
-				if (Cesium.defined(selectedEntity)) {
-				viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000;
-				viewer.flyTo(selectedEntity, {
-					offset: new Cesium.HeadingPitchRange(0, (-Math.PI / 2) + 0.0000001),
-				}).then( () => {
-					viewer.scene.screenSpaceCameraController.minimumZoomDistance = 0;
-				})
-			}
-		});
-	  
-
         document.getElementsByClassName("cesium-geocoder-input")[0].placeholder = "Busca un lugar...";
 
 
