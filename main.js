@@ -1,32 +1,33 @@
-const { app, BrowserWindow } = require('electron');
+const {
+  app,
+  BrowserWindow
+} = require('electron');
 const path = require('path');
 
-function createWindow () {
-    const win = new BrowserWindow({
-      show: false,
-      webPreferences: {
-        preload: path.join(__dirname, 'preload.js')
-      }
-    })
+function createWindow() {
+  const win = new BrowserWindow({
+    show: false,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    }
+  })
 
   win.maximize();
   win.show();
 
-  win.webContents.openDevTools()
+  win.removeMenu();
 
-    win.removeMenu();
-  
-    win.loadFile('index.html')
-  }
+  win.loadFile('index.html')
+}
 
-  app.whenReady().then(() => {
-    createWindow()
+app.whenReady().then(() => {
+  createWindow()
 
-    app.on('activate', function () {
-        if (BrowserWindow.getAllWindows().length === 0) createWindow()
-      })
+  app.on('activate', function () {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+})
 
-  app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') app.quit()
-  })
+app.on('window-all-closed', function () {
+  if (process.platform !== 'darwin') app.quit()
+})

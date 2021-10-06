@@ -19,20 +19,11 @@ Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 			timeline: false
 		});
 
-		//Cargamos los marcadores desde el JSON
-		let markersJSON = markerOptions.markers;
-		var markers;
-		markersJSON.forEach(marker => {
-			//Creamos un objeo Marker con cada marcador del JSON y lo añadimos al globo.
-			let markerObj = new Marker(viewer, marker.name, marker.longitude, marker.latitude, marker.z, marker.description);
-			markerObj.addMarker();
-
-			markers.push(markerObj);
-		});
+		markerList.load(viewer);
 
 		viewer.selectedEntityChanged.addEventListener(function (selectedEntity) {
 				if (Cesium.defined(selectedEntity)) {
-				viewer.scene.screenSpaceCameraController.minimumZoomDistance = 0;
+				viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000;
 				viewer.flyTo(selectedEntity, {
 					offset: new Cesium.HeadingPitchRange(0, (-Math.PI / 2) + 0.0000001),
 				}).then( () => {

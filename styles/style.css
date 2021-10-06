@@ -34,7 +34,7 @@ html, body, #globo {
 	font-size: 18px;
 }
 
-#botonBorrar_form {
+#borrar, #modificar {
     display: none;
 }
 

@@ -2,23 +2,20 @@ const { contextBridge } = require('electron');
 const fs = require('fs')
 
 
-let markers = require('./data/markers.json');
+let path = './data/markers.json';
 
 contextBridge.exposeInMainWorld(
-    'markerOptions', {
-        markers,
-        saveMarker
+    'api', {
+        load,
+        save
     }
-    );
+);
 
-function saveMarker(name, longitude, latitude, z, description = "") {
-    let marker = {
-        'name': name,
-        'longitude': longitude,
-        'latitude': latitude,
-        'z': z,
-        'description': description
-    }
-    markers.push(marker);
-    fs.writeFileSync('./data/markers.json', JSON.stringify(markers));
+function load () {
+    let data = fs.readFileSync(path);
+    return  JSON.parse(data);
+}
+
+function save (data) {
+    fs.writeFileSync(path, JSON.stringify(data));
 }
