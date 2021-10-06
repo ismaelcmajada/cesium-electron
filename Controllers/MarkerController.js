@@ -33,9 +33,9 @@ const markerList = {
             label: {
                 text: marker.name,
                 horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-                pixelOffset: new Cesium.Cartesian2(0.0, -20),
-                scale: 0.5,
-                fillColor: Cesium.Color.BLACK,
+                pixelOffset: new Cesium.Cartesian2(0.0, -30),
+                scale: 0.75,
+                fillColor: Cesium.Color.YELLOW,
                 pixelOffsetScaleByDistance: new Cesium.NearFarScalar(
                     1.5e2,
                     3.0,
